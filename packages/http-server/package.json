@@ -1,0 +1,11 @@
+{
+  "name": "http-server",
+  "version": "0.0.0",
+  "description": "Minimal http server to reply with a valid http response, reflecting back what was sent, except when an Accept header is sent with the value \"application/octet-stream\".",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ihqwilbert",
+  "license": "MIT"
+}

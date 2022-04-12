@@ -1,0 +1,11 @@
+{
+  "name": "buffer-writable-stream",
+  "version": "0.0.0",
+  "description": "Simple writable stream that collects everything in memory and can be collected when done.",
+  "main": "index.js",
+  "scripts": {
+    "test": "set \"NODE_OPTIONS=--experimental-vm-modules --es-module-specifier-resolution=node\"&& ..\\..\\node_modules\\.bin\\jest --no-cache"
+  },
+  "author": "ihqwilbert",
+  "license": "MIT"
+}

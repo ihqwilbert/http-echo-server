@@ -1,0 +1,30 @@
+{
+  "name": "http-echo-server",
+  "version": "0.0.1",
+  "description": "A simple http server either echoing back, what was sent or sending a png when Accept header is sent with value \"application/octet-stream\" to test for content mangling with request when encoding is not set to null. ",
+  "main": "index.js",
+  "dependencies": {
+    "winston": "^3.7.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
+    "eslint": "^8.13.0",
+    "jest": "^27.5.1",
+    "lerna": "^4.0.0",
+    "typescript": "^4.6.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ihqwilbert/http-echo-server.git"
+  },
+  "author": "ihqwilbert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ihqwilbert/http-echo-server/issues"
+  },
+  "homepage": "https://github.com/ihqwilbert/http-echo-server#readme"
+}
