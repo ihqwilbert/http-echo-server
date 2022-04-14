@@ -10,17 +10,15 @@ export class BufferWritableStream extends stream.Writable {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  _write(chunk: string | Buffer | Uint8Array | any,
+  _write(chunk: string | Buffer |  any,
     encoding: BufferEncoding | null,
     callback: (error?: Error | null) => void): boolean {
     const buf: Buffer =
-      typeof chunk === "string" && encoding !== null
-        ? Buffer.from(chunk, encoding)
-        : typeof chunk === "string" || Object.prototype.toString.call(chunk) === "[object Uint8Array]"
-          ? Buffer.from(chunk)
-          : Buffer.isBuffer(chunk)
-            ? chunk
-            : Buffer.from(JSON.stringify(chunk));
+      Buffer.isBuffer(chunk)
+        ? chunk
+        : typeof chunk === "string" && encoding !== null
+          ? Buffer.from(chunk, encoding)
+          : Buffer.from(JSON.stringify(chunk));
     this.#chunks.push(buf);
     callback(null);
     return true;

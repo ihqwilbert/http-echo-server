@@ -22,12 +22,48 @@ describe("BufferWriteableStream", () => {
     expect(bws.toBuffer()).toEqual(Buffer.from(testStr));
   });
 
+  it("should support the decodeStrings option", () => {
+    const bws = new BufferWritableStream({decodeStrings: false});
+    expect(() => {
+      bws.write(testStr);
+    }).not.toThrowError();
+    expect(bws.toBuffer()).toEqual(Buffer.from(testStr));
+  });
+
   it("should support writing a string to the stream with a utf16le encoding", () => {
     const bws = new BufferWritableStream({defaultEncoding: "utf16le"});
     expect(() => {
       bws.write(testStr);
     }).not.toThrowError();
     expect(bws.toBuffer()).toEqual(Buffer.from(testStr, "utf16le"));
+  });
+
+  it("should support writing in different encodings without decodeStrings", () => {
+    const bws = new BufferWritableStream({decodeStrings: false});
+    expect(() => {
+      bws.write(testStr);
+      bws.write(testStr, "utf16le");
+    }).not.toThrowError();
+    expect(bws.toBuffer().toString("utf8")).toEqual(
+      Buffer.concat([
+        Buffer.from(testStr),
+        Buffer.from(testStr,"utf16le")]
+      ).toString("utf8")
+    );
+  });
+
+  it("should support writing in different encodings with decodeStrings", () => {
+    const bws = new BufferWritableStream({decodeStrings: true});
+    expect(() => {
+      bws.write(testStr);
+      bws.write(testStr, "utf16le");
+    }).not.toThrowError();
+    expect(bws.toBuffer().toString("utf8")).toEqual(
+      Buffer.concat([
+        Buffer.from(testStr),
+        Buffer.from(testStr,"utf16le")]
+      ).toString("utf8")
+    );
   });
 
   it("should support writing a large string to the stream", async () => {
@@ -92,11 +128,27 @@ describe("BufferWriteableStream", () => {
     expect(drainCalled).toEqual(1);
     expect(finishedCalled).toEqual(1);
   });
-/*
+
   it("should support writing a Buffer to the stream", () => {
     const testBuffer = Buffer.from(testStr);
-
+    const bws = new BufferWritableStream();
+    expect(bws.write(testBuffer)).toEqual(true);
+    expect(bws.toBuffer()).toEqual(testBuffer);
   });
-*/
+
+  it("should support writing a Objects to the stream", () => {
+    const testObject:Array<{foo: string; bar: number}> = [{foo: "ping", bar: 42}, {foo: "pong", bar: 8}];
+    const bws = new BufferWritableStream({objectMode: true});
+    expect(bws.write(testObject)).toEqual(true);
+    expect(bws.toBuffer().toString()).toEqual(JSON.stringify(testObject));
+  });
+
+  it("should support writing a Uint8Array to the stream", () => {
+    const testArray: Uint8Array = Uint8Array.from([65,66,67]);
+    const bws = new BufferWritableStream();
+    expect(bws.write(testArray)).toEqual(true);
+    expect(bws.toBuffer().toString()).toEqual("ABC");
+  });
+
 });
 
