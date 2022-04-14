@@ -1,17 +1,20 @@
 {
   "name": "http-echo-server",
   "version": "0.0.1",
+  "type": "module",
   "description": "A simple http server either echoing back, what was sent or sending a png when Accept header is sent with value \"application/octet-stream\" to test for content mangling with request when encoding is not set to null. ",
   "main": "index.js",
   "dependencies": {
     "winston": "^3.7.2"
   },
   "devDependencies": {
+    "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
     "eslint": "^8.13.0",
     "jest": "^27.5.1",
     "lerna": "^4.0.0",
+    "ts-jest": "^27.1.4",
     "typescript": "^4.6.3"
   },
   "scripts": {
